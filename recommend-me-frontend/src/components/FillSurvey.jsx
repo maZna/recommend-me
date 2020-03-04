@@ -16,7 +16,8 @@ class FillSurvey extends Component {
             selected: 0,
             currentQuestion: '',
             currentScore: 0,
-            feedback: ''
+            feedback: '',
+            message: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleRadioChange = this.handleRadioChange.bind(this);
@@ -80,6 +81,12 @@ class FillSurvey extends Component {
                     currentQuestion: this.state.topics[this.state.selected].question
                 });
             }
+            else
+            {
+                this.setState({
+                    message: 'There is no survey to fill'
+                });
+            }
         });
     }
 
@@ -89,7 +96,7 @@ class FillSurvey extends Component {
             return (
                 <div>
                     <h2>
-                        There are no surveys available
+                        {this.state.message}
                     </h2>
                 </div>
             );

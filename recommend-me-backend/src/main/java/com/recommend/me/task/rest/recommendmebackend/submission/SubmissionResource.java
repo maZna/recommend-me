@@ -18,16 +18,30 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.recommend.me.task.rest.recommendmebackend.topic.TopicRepository;
 
-
+/**
+ * Represents the Survey Submission Controller
+ * @author Masna Ahmed
+ * @author https://www.linkedin.com/in/masna-ahmed-355432160/
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 public class SubmissionResource {
-
+	
+	/** An instance of a survey submission repository
+	 */
 	@Autowired
 	private SubmissionRepository submissionRepository;
 	
+	/** An instance of a survey topic repository
+	 */
 	@Autowired
 	private TopicRepository topicRepository;
 	
+	/**
+	 * Retrieves a list of submissions
+	 * @return a list of Submission entities
+	 */
 	@CrossOrigin
 	@GetMapping("/submissions")
 	public List<Submission> retrieveAllSubmissions()
@@ -35,6 +49,11 @@ public class SubmissionResource {
 		return submissionRepository.findAll();
 	}
 	
+	/**
+	 * Retrieves a List of submissions for a given topic ID
+	 * @param id unique topic id
+	 * @return a list of Submission entities
+	 */
 	@CrossOrigin
 	@GetMapping("/submissions/t/{id}")
 	public List<Submission> retrieveSubmissionByTopicId(@PathVariable long id)
@@ -42,6 +61,11 @@ public class SubmissionResource {
 		return submissionRepository.getSubmissionsByTopic(id);
 	}
 	
+	/**
+	 * Retrieves a submission with a specific submission ID
+	 * @param id a unique submission ID
+	 * @return a ResponseEntity containing the Submission content
+	 */
 	@GetMapping("/submissions/{id}")
 	public ResponseEntity<Submission> retrieveSubmissionById(@PathVariable long id)
 	{
@@ -53,6 +77,10 @@ public class SubmissionResource {
 		return ResponseEntity.ok(tempSub.get());
 	}
 	
+	/**
+	 * Updates the NPM score for a given topic
+	 * @param topicId a given topic ID
+	 */
 	private void updateNpm(long topicId)
 	{
 		int promoters = submissionRepository.getNumberOfPromotersByTopic(topicId);
@@ -64,6 +92,11 @@ public class SubmissionResource {
 		topicRepository.updateNpm(newNpm, topicId);
 	}
 	
+	/**
+	 * Creates a new instance of a Survey Submission
+	 * @param submission a new Submission
+	 * @return a ResponseEntity containing
+	 */
 	@CrossOrigin
 	@PostMapping("/submissions")
 	public ResponseEntity<Object> createSubmission(@RequestBody Submission submission)
@@ -79,6 +112,11 @@ public class SubmissionResource {
 		return ResponseEntity.created(location).build();
 	}
 	
+	/**
+	 * Deletes a given instance of a Submission
+	 * @param id unique ID of a submission
+	 */
+	@CrossOrigin
 	@DeleteMapping("/submissions/{id}")
 	public void deleteSubmission(@PathVariable long id)
 	{
@@ -90,6 +128,13 @@ public class SubmissionResource {
 			updateNpm(temp.get().getTopic().getID());
 	}
 	
+	/**
+	 * Updates a submitted suvey
+	 * @param submission new Survey content
+	 * @param id unique ID survey to update
+	 * @return a ResponseEntity containing an HTTP response
+	 */
+	@CrossOrigin
 	@PutMapping("/submissions/{id}")
 	public ResponseEntity<Object> updateSubmission(@RequestBody Submission submission, @PathVariable long id)
 	{

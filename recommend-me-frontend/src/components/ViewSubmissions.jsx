@@ -9,7 +9,8 @@ class ViewSubmissions extends Component {
         this.state = {
             tableData: [],
             topics: [],
-            selected: 0
+            selected: 0,
+            message: ''
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -42,10 +43,24 @@ class ViewSubmissions extends Component {
                 axios.get('http://localhost:8080/submissions/t/' + this.state.selected, {
                     responseType: 'json'
                 }).then(response => {
-                    this.setState({
-                        tableData: response.data
-                    });
+                    if (response.data.length !== 0)
+                    {
+                        this.setState({
+                            tableData: response.data
+                        });
+                    }
+                    else {
+                        this.setState({
+                            message: 'No submissions to display'
+                        });
+                    }
                 })
+            }
+            else
+            {
+                this.setState({
+                    message: 'No submissions to display'
+                });
             }
         });
 
@@ -55,7 +70,7 @@ class ViewSubmissions extends Component {
         if (this.state.tableData.length === 0) {
             return (
                 <div>
-                <h2 className="title">No submissions to display</h2>
+                <h2 className="title">{this.state.message}</h2>
                 </div>
             );
         }

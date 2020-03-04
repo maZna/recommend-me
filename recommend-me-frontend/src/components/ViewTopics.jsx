@@ -7,7 +7,8 @@ class ViewTopics extends Component {
     {
         super();
         this.state = {
-            tableData: []
+            tableData: [],
+            message: ''
         };
     }
 
@@ -15,9 +16,18 @@ class ViewTopics extends Component {
         axios.get('http://localhost:8080/topics', {
             responseType: 'json'
         }).then(response => {
-            this.setState({
-                tableData: response.data
-            });
+            if (response.data.length !== 0)
+            {
+                this.setState({
+                    tableData: response.data
+                });
+            }
+            else
+            {
+                this.setState({
+                    message: 'No topics to display'
+                });
+            }
         });
     }
 
@@ -26,7 +36,7 @@ class ViewTopics extends Component {
         {
             return (
                 <div>
-                    <h2>No topics to display</h2>
+                    <h2>{this.state.message}</h2>
                 </div>
             );
         }
