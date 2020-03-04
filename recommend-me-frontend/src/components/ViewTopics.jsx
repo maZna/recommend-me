@@ -22,6 +22,14 @@ class ViewTopics extends Component {
     }
 
     render() {
+        if (this.state.tableData.length === 0)
+        {
+            return (
+                <div>
+                    <h2>No topics to display</h2>
+                </div>
+            );
+        }
         return(
             <div>
                 <h2 className="title">All survey topics</h2>

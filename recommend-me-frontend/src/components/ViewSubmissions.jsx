@@ -33,17 +33,20 @@ class ViewSubmissions extends Component {
         axios.get('http://localhost:8080/topics', {
             responseType: 'json'
         }).then(response => {
-            this.setState({
-                topics: response.data,
-                selected: response.data[0].id
-            });
-            axios.get('http://localhost:8080/submissions/t/' + this.state.selected, {
-                responseType: 'json'
-            }).then(response => {
+            if (response.data.length !== 0)
+            {
                 this.setState({
-                    tableData: response.data
+                    topics: response.data,
+                    selected: response.data[0].id
                 });
-            })
+                axios.get('http://localhost:8080/submissions/t/' + this.state.selected, {
+                    responseType: 'json'
+                }).then(response => {
+                    this.setState({
+                        tableData: response.data
+                    });
+                })
+            }
         });
 
     }
@@ -52,15 +55,7 @@ class ViewSubmissions extends Component {
         if (this.state.tableData.length === 0) {
             return (
                 <div>
-                <h2 className="title">Submissions for </h2>
-                <select
-                    className="form-control"
-                    value={this.state.topics[this.state.selected]}
-                    onChange={this.handleChange}
-                >
-                    {this.state.topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.topic}</option>)}
-                </select>
-                    <h3>No data to display</h3>
+                <h2 className="title">No submissions to display</h2>
                 </div>
             );
         }

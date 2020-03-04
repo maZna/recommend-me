@@ -69,18 +69,31 @@ class FillSurvey extends Component {
         axios.get('http://localhost:8080/topics', {
             responseType: 'json'
         }).then(response => {
-            this.setState({
-                topics: response.data
-            });
-            console.log(this.state.topics[0].question);
-            this.setState({
-                selected: this.state.topics[this.state.selected].id,
-                currentQuestion: this.state.topics[this.state.selected].question
-            });
+            if (response.data.length !== 0)
+            {
+                this.setState({
+                    topics: response.data
+                });
+                console.log(this.state.topics[0].question);
+                this.setState({
+                    selected: this.state.topics[this.state.selected].id,
+                    currentQuestion: this.state.topics[this.state.selected].question
+                });
+            }
         });
     }
 
     render() {
+        if (this.state.topics.length === 0 )
+        {
+            return (
+                <div>
+                    <h2>
+                        There are no surveys available
+                    </h2>
+                </div>
+            );
+        }
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
