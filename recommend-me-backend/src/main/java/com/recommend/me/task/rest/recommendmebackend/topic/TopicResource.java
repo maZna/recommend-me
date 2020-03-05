@@ -98,7 +98,7 @@ public class TopicResource {
 			return ResponseEntity.notFound().build();
 		
 		topicRepository.deleteById(id);
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
 		
 	}
 	

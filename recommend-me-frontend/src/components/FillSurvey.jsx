@@ -95,9 +95,9 @@ class FillSurvey extends Component {
         {
             return (
                 <div>
-                    <h2>
-                        {this.state.message}
-                    </h2>
+                        <h2>
+                            {this.state.message}
+                        </h2>
                 </div>
             );
         }

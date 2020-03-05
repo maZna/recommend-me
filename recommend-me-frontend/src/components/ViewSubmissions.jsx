@@ -23,9 +23,18 @@ class ViewSubmissions extends Component {
             responseType: 'json'
         })
             .then(response => {
-                this.setState({
-                    tableData: response.data,
-                })
+                if (response.data.length !== 0)
+                {
+                    this.setState({
+                        tableData: response.data
+                    })
+                }
+                else {
+                    this.setState({
+                        tableData: [],
+                        message: 'No submissions to display'
+                    })
+                }
             });
 
     }
@@ -70,7 +79,15 @@ class ViewSubmissions extends Component {
         if (this.state.tableData.length === 0) {
             return (
                 <div>
-                <h2 className="title">{this.state.message}</h2>
+                <h2 className="title">Submissions for</h2>
+                <select
+                    className="form-control"
+                    value={this.state.topics[this.state.selected]}
+                    onChange={this.handleChange}
+                >
+                    {this.state.topics.map((topic) => <option key={topic.id} value={topic.id}>{topic.topic}</option>)}
+                </select>
+                <h3>{this.state.message}</h3>
                 </div>
             );
         }
