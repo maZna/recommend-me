@@ -7,6 +7,6 @@ Tools and Technologies used:
 1) SpringBoot
 2) JPA and Hibernate
 3) H2 In-memory database
-4) ReactJs
+4) ReactJS
 5) Swagger Documentation for endpoints
 
