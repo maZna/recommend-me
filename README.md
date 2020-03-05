@@ -6,7 +6,8 @@ Users can use this application to create Surveys regarding various topics. A typ
 Tools and Technologies used:
 1) SpringBoot
 2) JPA and Hibernate
-3) H2 In-memory database
-4) ReactJS
-5) Swagger Documentation for endpoints
+3) Maven
+4) H2 In-memory database
+5) ReactJS
+6) Swagger Documentation for endpoints
 
