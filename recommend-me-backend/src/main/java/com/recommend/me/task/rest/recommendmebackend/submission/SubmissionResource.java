@@ -66,6 +66,7 @@ public class SubmissionResource {
 	 * @param id a unique submission ID
 	 * @return a ResponseEntity containing the Submission content
 	 */
+	@CrossOrigin
 	@GetMapping("/submissions/{id}")
 	public ResponseEntity<Submission> retrieveSubmissionById(@PathVariable long id)
 	{
