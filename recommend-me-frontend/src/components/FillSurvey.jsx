@@ -85,7 +85,8 @@ class FillSurvey extends Component {
             }
             else {
                 this.setState({
-                    message: 'There is no survey to fill'
+                    message: 'There is no survey to fill',
+                    loaded: true
                 });
             }
         });
