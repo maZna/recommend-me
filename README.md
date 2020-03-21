@@ -10,11 +10,14 @@ Tools and Technologies used:
 4) H2 In-memory database
 5) ReactJS
 6) Swagger Documentation for endpoints
+7) Docker
 
 Instructions on running the project:
+In order to run the project, you need to have docker and docker-compose installed on your machine.
+
 1) Clone the project to a local folder
-2) To launch the back-end application (using eg. Eclipse), go to File -> Import -> Maven -> Existing Maven Project and select the recommend-me-backend folder as the project folder. Now run the RecommendMeBackendApplication.java file.
-3) To launch the front-end application, open the command line terminal in the recommend-me-frontend directory and run the command "npm start"
-4) The front-end can be accessed at http://localhost:3000/
-5) The H2 In-memory database can be accessed at http://localhost:8080/h2/ and authenticated using the username "sa" and an empty password by default.
+2) Open the command line terminal in the root folder of the project and run the command: "sudo docker-compose up".
+3) The front-end can be accessed at http://localhost:3000/
+4) The H2 In-memory database can be accessed at http://localhost:8080/h2/ and authenticated using the username "sa" and an empty password by default.
+5) After using the application, run the command "sudo docker-compose down"
 6) Happy Surveying!
