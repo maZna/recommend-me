@@ -28,8 +28,8 @@ class CreateSurvey extends Component {
         });
     }
 
-    handleSubmit() {
-
+    handleSubmit(e) {
+        e.preventDefault();
         fetch('http://localhost:8080/topics', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },

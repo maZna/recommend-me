@@ -6,10 +6,10 @@ const Navigation = () => {
     return (    
        <div>
         <ul>
-          <li><button className="btn btn-light"><NavLink to="/">View Submissions</NavLink></button></li>
-          <li><button className="btn btn-light"><NavLink to="/viewTopics">View Topics</NavLink></button></li>
-          <li><button className="btn btn-light"><NavLink to="/createSurvey">Create Survey</NavLink></button></li>
-          <li><button className="btn btn-light"><NavLink to="/fillSurvey">Fill Survey</NavLink></button></li>
+          <li><NavLink to="/"><button className="btn btn-light">View Submissions</button></NavLink></li>
+          <li><NavLink to="/viewTopics"><button className="btn btn-light">View Topics</button></NavLink></li>
+          <li><NavLink to="/createSurvey"><button className="btn btn-light">Create Survey</button></NavLink></li>
+          <li><NavLink to="/fillSurvey"><button className="btn btn-light">Fill Survey</button></NavLink></li>
           </ul>
        </div>
     );

@@ -1,16 +1,13 @@
-# base image
-FROM node:13.10-alpine
-
-# set working directory
+# Stage 0, "build-stage", based on Node.js to build the frontend
+FROM node:alpine as build
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /app/package.json
+COPY package*.json /app/
 RUN npm install
-RUN npm install react-scripts@3.0.1 -g
+COPY . /app/
+RUN npm run build
 
-# start app
-CMD ["npm", "start"]
+# Stage 1, based on NGINX to provide a configuration to be used with react-router
+FROM nginx:1.15.2-alpine
+COPY --from=build /app/build /var/www
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+ENTRYPOINT ["nginx","-g","daemon off;"]

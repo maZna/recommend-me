@@ -237,8 +237,9 @@ class UpdateForm extends Component {
         });
     }
 
-    handleSubmit()
+    handleSubmit(e)
     {
+        e.preventDefault();
         fetch(this.props.updateURL, {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
